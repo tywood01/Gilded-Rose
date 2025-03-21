@@ -9,8 +9,38 @@ class GildedRoseTest(unittest.TestCase):
         items = [Item("foo", 0, 0)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertEqual("fixme", items[0].name)
+        self.assertEqual("foo", items[0].name)
 
-        
-if __name__ == '__main__':
+    def test_food(self):
+        items = [Item("Aged Brie", 0, 0)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual("Aged Brie", gilded_rose.items[0].name)
+        self.assertEqual(1, gilded_rose.items[0].quality)
+
+    def test_weapon(self):
+        items = [Item("Sulfuras, Hand of Ragnaros", 0, 80)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual("Sulfuras, Hand of Ragnaros", gilded_rose.items[0].name)
+        self.assertEqual(80, gilded_rose.items[0].quality)
+
+    def test_ticket(self):
+        items = [Item("Backstage passes to a TAFKAL80ETC concert", 0, 0)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(
+            "Backstage passes to a TAFKAL80ETC concert", gilded_rose.items[0].name
+        )
+        self.assertEqual(0, gilded_rose.items[0].quality)
+
+    def test_conjured(self):
+        items = [Item("Conjured", 0, 0)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual("Conjured", gilded_rose.items[0].name)
+        self.assertEqual(0, gilded_rose.items[0].quality)
+
+
+if __name__ == "__main__":
     unittest.main()
