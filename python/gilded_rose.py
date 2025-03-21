@@ -40,6 +40,7 @@ class GildedRose(object):
         """Update the quality of all the inn's items."""
 
         for item in self.items:
+            item.sell_in -= 1
             item.update_quality()
 
 

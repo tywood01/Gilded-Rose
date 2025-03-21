@@ -12,7 +12,7 @@ Purpose:
 
 
 class Default:
-    """This contains the default behavior for items."""
+    """Represents the default behavior for items."""
 
     def __init__(self, name, sell_in, quality):
         self.name = name
@@ -20,11 +20,11 @@ class Default:
         self.quality = quality
 
     def update_quality(self):
-        self.sell_in -= 1
-        if self.quality > 0:
-            self.quality -= 1
-        if self.sell_in < 0 and self.quality > 0:
-            self.quality -= 1
+        if self.sell_in >= 0:
+            self.quality = max(0, self.quality - 1)
+
+        else:
+            self.quality = max(0, self.quality - 2)
 
 
 class Food:
@@ -40,7 +40,7 @@ class Food:
 
 
 class Weapon:
-    """Represents weapons such as Sulfuras that never depreciate."""
+    """Represents weapons such as Sulfuras that never fluctuate in value."""
 
     def __init__(self, name, sell_in, quality):
         self.name = name
@@ -60,7 +60,7 @@ class Ticket:
         self.quality = quality
 
     def update_quality(self):
-        if self.sell_in <= 0:
+        if self.sell_in < 0:
             self.quality = 0
 
         elif self.sell_in <= 5:
@@ -74,7 +74,7 @@ class Ticket:
 
 
 class Conjured:
-    """Represents conjured items that depreciate twice as fast as normal items."""
+    """Represents conjured items that depreciate twice as fast as default items."""
 
     def __init__(self, name, sell_in, quality):
         self.name = name
